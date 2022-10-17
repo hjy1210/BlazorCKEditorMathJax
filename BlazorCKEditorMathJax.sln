@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32901.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorCKEditorMathJax", "BlazorCKEditorMathJax\BlazorCKEditorMathJax.csproj", "{ED1818F8-3BA9-457A-AAB9-ABD7B58558EC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ED1818F8-3BA9-457A-AAB9-ABD7B58558EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED1818F8-3BA9-457A-AAB9-ABD7B58558EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED1818F8-3BA9-457A-AAB9-ABD7B58558EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED1818F8-3BA9-457A-AAB9-ABD7B58558EC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A6962455-F94C-4624-8D78-20BABCB6F8C2}
+	EndGlobalSection
+EndGlobal
