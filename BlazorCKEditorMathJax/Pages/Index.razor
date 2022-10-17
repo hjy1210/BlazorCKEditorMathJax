@@ -1,9 +1,19 @@
 ﻿@page "/"
-
+@inject IJSRuntime JS
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
-
-Welcome to your new app.
-
 <SurveyPrompt Title="How is Blazor working for you?" />
+<div>
+    <p>
+        Vector: \(\overrightarrow{AB}\), Line Segment: \(\overline{AB} \)
+        \[\overrightarrow{AB} \overline{AB}\]
+    </p>
+</div>
+<button @onclick="Typeset">Typeset</button>
+@code {
+    private void Typeset()
+    {
+        JS.InvokeVoidAsync("typeset");
+    }
+}
