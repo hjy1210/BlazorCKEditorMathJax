@@ -11,9 +11,21 @@
     </p>
 </div>
 <button @onclick="Typeset">Typeset</button>
+MarkupString <div>@((MarkupString)Value)</div>
+InnerHTML<div id="html"></div>
 @code {
+    private string Value = @"\(\overrightarrow{AB} \overline{AB}\)";
     private void Typeset()
     {
+        JS.InvokeVoidAsync("insertInnerHTML", "html", Value);
         JS.InvokeVoidAsync("typeset");
     }
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+        }
+        //Typeset();
+    }
+
 }
