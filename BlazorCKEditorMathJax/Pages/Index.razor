@@ -4,13 +4,13 @@
 
 <h1>Hello, world!</h1>
 <SurveyPrompt Title="How is Blazor working for you?" />
-<div>
+<div id="a">
     <p>
         Vector: \(\overrightarrow{AB}\), Line Segment: \(\overline{AB} \)
         \[\overrightarrow{AB} \overline{AB}\]
     </p>
 </div>
-<p>
+<p id="p">
     <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
         <mi>x</mi> <mo>=</mo>
         <mrow>
@@ -34,21 +34,17 @@
     </math>
 </p>
 <button @onclick="Typeset">Typeset</button>
-MarkupString <div>@((MarkupString)Value)</div>
+MarkupString <div id="mark1">@((MarkupString)Value)</div>
+<div id="mark2">@((MarkupString)Value2)</div>
 InnerHTML<div id="html"></div>
 @code {
     private string Value = @"\(\overrightarrow{AB} \overline{AB}\)";
-    private void Typeset()
+    private string Value2 = "";
+    private async Task Typeset()
     {
-        JS.InvokeVoidAsync("insertInnerHTML", "html", Value);
-        JS.InvokeVoidAsync("typeset");
+        await JS.InvokeVoidAsync("insertInnerHTML", "html", Value);
+        Value2 = Value;
+        //await InvokeAsync(StateHasChanged);
+        await JS.InvokeVoidAsync("typesetPromise","mark1,mark2,html,a,p");
     }
-    protected override void OnAfterRender(bool firstRender)
-    {
-        if (firstRender)
-        {
-        }
-        //Typeset();
-    }
-
 }

@@ -44,11 +44,23 @@
 
     <script src="_framework/blazor.server.js"></script>
     <script>
-        function typeset() {
-            MathJax.typeset();
+        async function typeset() {
+            await MathJax.typesetPromise();
         }
-        function insertInnerHTML(id, value){
+        async function  insertInnerHTML(id, value){
             document.getElementById(id).innerHTML = value;
+        }
+        async function typesetPromise(outputIds) {
+            if (outputIds == null || outputIds.trim() == '') {
+                await MathJax.typesetPromise();
+            } else {
+                var ids = outputIds.split(',');
+                var nodes = [];
+                for (var i = 0; i < ids.length; i++) {
+                    nodes.push(document.getElementById(ids[i]));
+                }
+                await MathJax.typesetPromise(nodes);
+            }
         }
     </script>
 </body>
