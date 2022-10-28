@@ -1,0 +1,27 @@
+﻿@page "/tex"
+@inject IJSRuntime JS
+<h3>Tex</h3>
+
+\[\overset{-\!-\!\rightarrow}{AB} \overset{-\!-\!-\!}{AB}\]
+
+<div>@((MarkupString)Output)</div>
+<div id="me"></div>
+<button @onclick="Typeset">Typeset</button>
+<button @onclick="Typeset2">Typeset2</button>
+@code {
+    private IJSObjectReference? module;
+    private string Output = "";
+    private void Typeset()
+    {
+        module!.InvokeVoidAsync("typeset");
+    }
+    private async Task Typeset2(){
+        var str = @"\[\overrightarrow{ABC}\]";
+        Output = await module!.InvokeAsync<string>("typeset2", str );
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender){
+        if (firstRender){
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./scripts.js");
+        }
+    }
+}

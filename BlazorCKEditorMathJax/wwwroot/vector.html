@@ -17,15 +17,87 @@
         }
     </script>
     <script id="MathJax-script" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-
+    <script src="js/ckeditor.js"></script>
     <title></title>
 </head>
 <body>
+    <p>\overrightarrow, \overline, \hspace 在 MathJax + CKEditor 時都<b>表現正常</b>，但 MathJax + CKEditor + Blazor 時就<b>表現失常</b></p>
     <div>
         <p>
             Vector: \(\overrightarrow{AB}\), Line Segment: \(\overline{AB} \)
             \[\overrightarrow{AB} \overline{AB}\]
         </p>
+        <p>\(x^2 \overrightarrow{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]</p>
     </div>
+    <textarea id="editorId">\(x^2 \overrightarrow{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]</textarea>
+    <div id="outputId"></div>
+    <button onclick="editors['editorId'].setData(texstr)">SetData</button>
+    <button onclick="typeset('outputId')">Typeset</button>
+    <button onclick="typeset2('outputId')">Typeset2</button>
+
+    <script>
+        var texstr = "<p>\\(x^2 \\overrightarrow{ABC}  \\overline{ABC}\\) \\[ \\ce{CH4(g) + H2O(g) <=>[\\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \\hspace{0.5cm}\\Delta H <0 \\]</p>";
+        let editors = {};
+        var config = {
+            fontFamily: {
+                options: [
+                    'default', 'Arial', 'sans - serif', 'Courier New', 'Courier', 'monospace', 'Courier',
+                    '標楷體',
+                    '細明體',
+                    'Times New Roman'
+                ],
+                supportAllValues: true
+            },
+            alignment: {
+                options: ['left', 'right', 'center']
+            },
+            toolbar: {
+                items: ['heading', 'htmlEmbed', '|',
+                    'bold', 'italic', 'underline', 'highlight', 'link', 'alignment', 'bulletedList', 'numberedList', '|',
+                    'outdent', 'indent', '|',
+                    'imageUpload', 'blockQuote', 'insertTable', 'codeBlock', 'findAndReplace', '|',
+                    'fontBackgroundColor', 'fontColor', 'fontFamily', 'fontSize', '|',
+                    'horizontalLine', 'specialCharacters', 'undo', 'redo', 'sourceEditing'
+                ]
+            },
+            language: 'en',
+            image: {
+                toolbar: [
+                    'imageTextAlternative', 'imageStyle:inline', 'imageStyle:block', 'imageStyle:side', 'linkImage', 'toggleImageCaption'
+                ]
+            },
+            table: {
+                contentToolbar: [
+                    'tableColumn', 'tableRow', 'mergeTableCells', 'tableCellProperties', 'tableProperties', 'toggleTableCaption'
+                ]
+            },
+            licenseKey: '',
+        }
+
+        ClassicEditor
+            .create(document.getElementById("editorId"), config)
+            .then(neweditor => {
+                editors["editorId"] = neweditor;
+                console.log(Object.keys(editors));
+            })
+            .catch(error => console.error(error));
+
+        async function typeset2(outputId) {
+            var ele = document.createElement("div"); // document.getElementById("me");
+            ele.innerHTML = editors["editorId"].getData();
+            await MathJax.typesetPromise([ele]);
+            document.getElementById(outputId).innerHTML = ele.innerHTML;
+            //return ele.innerHTML;
+        }
+        async function typeset(outputId) {
+            var ele = document.getElementById(outputId);
+            ele.innerHTML = editors["editorId"].getData();
+            await MathJax.typesetPromise([ele]);
+            //document.getElementById(outputId).innerHTML = ele.innerHTML;
+            //return ele.innerHTML;
+        }
+
+
+    </script>
 </body>
 </html>

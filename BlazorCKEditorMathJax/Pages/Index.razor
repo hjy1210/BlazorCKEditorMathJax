@@ -10,10 +10,28 @@
         \[\overrightarrow{AB} \overline{AB}\]
     </p>
 </div>
+<div>@((MarkupString)Output)</div>
 <button @onclick="Typeset">Typeset</button>
+<button @onclick="Typeset2">Typeset2</button>
 @code {
+    private IJSObjectReference? module;
+    private string Output;
+    private string Input = @"Vector: \(\overrightarrow{AB}\), Line Segment: \(\overline{AB} \)  \[\overrightarrow{AB} \overline{AB}\]";
+    private string Input2 = @"\(x^2 \overrightarrow{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]";
     private void Typeset()
     {
-        JS.InvokeVoidAsync("typeset");
+        module!.InvokeVoidAsync("typeset");
     }
+    private async Task Typeset2()
+    {
+        Output = await module!.InvokeAsync<string>("typeset2", Input2);
+    }
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./scripts.js");
+        }
+    }
+
 }
