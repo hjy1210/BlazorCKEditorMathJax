@@ -3,20 +3,21 @@
 <h3>Tex</h3>
 
 \[\overset{-\!-\!\rightarrow}{AB} \overset{-\!-\!-\!}{AB}\]
-
+<div>
+    <textarea  @bind="str" style="width:100%" rows="5" cols="80"></textarea>
+</div>
 <div>@((MarkupString)Output)</div>
-<div id="me"></div>
 <button @onclick="Typeset">Typeset</button>
 <button @onclick="Typeset2">Typeset2</button>
 @code {
     private IJSObjectReference? module;
+    private string str { get; set; } = @"\(x^2 \overrightarrow{ABC}\overline{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]";
     private string Output = "";
     private void Typeset()
     {
         module!.InvokeVoidAsync("typeset");
     }
     private async Task Typeset2(){
-        var str = @"\[\overrightarrow{ABC}\]";
         Output = await module!.InvokeAsync<string>("typeset2", str );
     }
     protected override async Task OnAfterRenderAsync(bool firstRender){

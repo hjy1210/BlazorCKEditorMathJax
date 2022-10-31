@@ -21,19 +21,23 @@
     <title></title>
 </head>
 <body>
-    <p>\overrightarrow, \overline, \hspace 在 MathJax + CKEditor 時都<b>表現正常</b>，但 MathJax + CKEditor + Blazor 時就<b>表現失常</b></p>
+    <p>\overrightarrow, \overline, \hspace 在 MathJax + CKEditor 時都<b>表現正常</b>，但 MathJax + CKEditor + Blazor + Typeset2 時就<b>表現失常</b>，主要是長度單位只接受em,ex不接受in,cm。</p>
+    <h1>Pure MathJax</h1>
     <div>
         <p>
             Vector: \(\overrightarrow{AB}\), Line Segment: \(\overline{AB} \)
             \[\overrightarrow{AB} \overline{AB}\]
         </p>
-        <p>\(x^2 \overrightarrow{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]</p>
+        <p><code>\(x^2 \overrightarrow{ABC}\overline{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]</code></p>
+        <p>\(x^2 \overrightarrow{ABC}\overline{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]</p>
     </div>
-    <textarea id="editorId">\(x^2 \overrightarrow{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]</textarea>
-    <div id="outputId"></div>
+    <h1>MathJax + CKEditor</h1>
+    <textarea id="editorId">\(x^2 \overrightarrow{ABC}\overline{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]</textarea>
     <button onclick="editors['editorId'].setData(texstr)">SetData</button>
     <button onclick="typeset('outputId')">Typeset</button>
     <button onclick="typeset2('outputId')">Typeset2</button>
+    <h2>Output of MathJax + CkEditor</h2>
+    <div id="outputId"></div>
 
     <script>
         var texstr = "<p>\\(x^2 \\overrightarrow{ABC}  \\overline{ABC}\\) \\[ \\ce{CH4(g) + H2O(g) <=>[\\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \\hspace{0.5cm}\\Delta H <0 \\]</p>";

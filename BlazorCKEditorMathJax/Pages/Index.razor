@@ -17,7 +17,7 @@
     private IJSObjectReference? module;
     private string Output;
     private string Input = @"Vector: \(\overrightarrow{AB}\), Line Segment: \(\overline{AB} \)  \[\overrightarrow{AB} \overline{AB}\]";
-    private string Input2 = @"\(x^2 \overrightarrow{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]";
+    private string Input2 = @"\(x^2 \overrightarrow{ABC} \overline{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{4em}\raise.5ex\Delta H <0 \]";
     private void Typeset()
     {
         module!.InvokeVoidAsync("typeset");
