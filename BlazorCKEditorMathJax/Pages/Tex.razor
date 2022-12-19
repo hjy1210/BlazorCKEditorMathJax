@@ -2,7 +2,7 @@
 @inject IJSRuntime JS
 <h3>Tex</h3>
 
-\[\overset{-\!-\!\rightarrow}{AB} \overset{-\!-\!-\!}{AB}\]
+\[\overrightarrow{AB} \overline{AB} \overset{-\!-\!\rightarrow}{AB} \overset{-\!-\!-\!}{AB}\]
 <div>
     <textarea  @bind="str" style="width:100%" rows="5" cols="80"></textarea>
 </div>
@@ -11,7 +11,7 @@
 <button @onclick="Typeset2">Typeset2</button>
 @code {
     private IJSObjectReference? module;
-    private string str { get; set; } = @"\(x^2 \overrightarrow{ABC}\overline{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \]";
+    private string str { get; set; } = @"\(x^2 \overrightarrow{ABC}\overline{ABC}\) \[ \ce{CH4(g) + H2O(g) <=>[\scriptscriptstyle N i,700K] CO(g) + 3H2(g)} \hspace{0.5cm}\Delta H <0 \] \(\boxed{\begin{array}{l}越甲:越國軍隊 \\ 車右：駕者右邊的武士   \end{array}}\) \(\bbox[5px,border:2px solid black]{\begin{array}{l}\text{越甲:越國軍隊} \\ \text{車右：駕者右邊的武士}   \end{array}}\) \(\bbox[5pt, border:2px solid red]{\begin{array}{l}\text{越甲:越國軍隊} \\ \text{車右：駕者右邊的武士} \\  \text{鈞:同「均」}\\  \text{血食:殺牲取血以祭天地祖先。保有政權方能血食祭祀。}\end{array}}\)";
     private string Output = "";
     private void Typeset()
     {
